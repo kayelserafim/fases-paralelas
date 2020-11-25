@@ -16,10 +16,12 @@
 // 0 para desabilitar os prints e 1 para habilitar
 #define DEBUG 1
 // trabalho final com o valores 10.000, 100.000, 1.000.000
-#define ARRAY_SIZE 20
+const int ARRAY_SIZE = 20;
+// Percentual de números a serem trocados a cada iteração
+const int PERC_TO_EXCHANGE = 50;
 
 /*
- * Buble sort algorithm.
+ * Bubble sort algorithm.
  */
 void bs(int n, int *vetor) {
 	int c = 0, d, troca, trocou = 1;
@@ -64,8 +66,6 @@ int main(int argc, char **argv) {
 	// Identificador do processo
 	int my_rank;
 	int left_element;
-	// Percentual de números a serem trocados a cada iteração
-	int perc_to_exchange = 50;
 	// index for loops
 	int i;
 	// Tempo inicial, local e total
@@ -81,16 +81,14 @@ int main(int argc, char **argv) {
 	int vector_size = ARRAY_SIZE / proc_n;
 	int vect_ctrl[proc_n];
 
-	if (my_rank == 0) {
-		startTime = MPI_Wtime();
-	}
+	startTime = MPI_Wtime();
 
 	int last_proc = proc_n - 1;
-	int size_exchange = vector_size * perc_to_exchange / 100;
+	int size_exchange = vector_size * PERC_TO_EXCHANGE / 100;
 	int *vector = (int*) malloc((size_exchange + vector_size) * sizeof(int));
 
 	populate(vector_size, proc_n, my_rank, vector);
-	printf("Percentual de troca %d%%(%d), vetor %d populado\n ", perc_to_exchange, size_exchange, my_rank);
+	printf("Percentual de troca %d%%(%d), vetor %d populado\n ", PERC_TO_EXCHANGE, size_exchange, my_rank);
 
 #if DEBUG
 	/* print unsorted array */
@@ -167,6 +165,7 @@ int main(int argc, char **argv) {
 	}
 
 #if DEBUG
+	printf("Vetor %d ordenado ", my_rank);
 	print(vector_size, vector);
 #endif
 
