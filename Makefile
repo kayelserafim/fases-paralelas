@@ -8,7 +8,10 @@ LAD_CMD = ladcomp -env mpicc
 
 CFLAGS = -Wall -g -lm
 
-all: parallel.o
+all: sequential.o parallel.o
+
+sequential.o: $(S_DIR)/sequential.c
+	$(CC) -o $@ $< $(CFLAGS)
 	
 parallel.o: $(S_DIR)/parallel.c
 ifdef LAD_ENV
