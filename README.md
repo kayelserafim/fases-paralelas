@@ -153,6 +153,10 @@ openmpi: /usr/lib/x86_64-linux-gnu/openmpi /etc/openmpi /usr/share/openmpi
 
 # Exemplos de compilação e execução
 
+**Compilação C em máquina local:** gcc sequential.c -o sequential.o
+
+**Execução C em máquina local:** ./sequential.o
+
 **Compilação MPI em máquina local:** mpicc parallel.c -o parallel.o
 
 **Execução MPI em máquina local:** mpirun --hostfile ./hostfile -np 4 ./parallel.o
