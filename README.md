@@ -6,7 +6,7 @@ Cada um dos processos é responsável por 1/np do vetor (neste caso 1/16 ou 1/32
 
 * Ordenação local: cada processo ordena a sua parte do vetor global (usar o código da rotina BS abaixo);
 * É feita uma verificação distribuída para identificar se o vetor global esta ordenado: cada processo envia o seu maior valor para o vizinho da direita, este compara com o seu menor valor e verifica se os dois processos estão ordenados entre si. Como todos os processos fazem esta operação, cada um sabe se está ordenado em relação ao vizinho da esquerda. Esta informação é distribuída para todos os processos com uma operação de comunicação coletiva (Broadcast). Se todos estiverem ordenados entre si, todos terminam;
-* Se não, cada processo troca uma parte dos seus valores mais baixos com os mais altos do vizinho da esquerda. A ideia é empurrar os valores que estão foram de lugar para os processos corretos, e volta para a fase 1.
+* Se não, cada processo troca uma parte dos seus valores mais baixos com os mais altos do vizinho da esquerda. A ideia é empurrar os valores que estão fora de lugar para os processos corretos, e volta para a fase 1.
 
 
 Os itens para avaliação são:
@@ -161,6 +161,6 @@ openmpi: /usr/lib/x86_64-linux-gnu/openmpi /etc/openmpi /usr/share/openmpi
 
 **Execução MPI em máquina local:** mpirun --hostfile ./hostfile -np 4 ./parallel.o
 
-**Execução no lad:** ladrun -np 16 /parallel.o
+**Execução no lad:** ladrun -np 16 ./parallel.o
 
-**Execução no lad:** ladrun -np 32 /parallel.o
+**Execução no lad:** ladrun -np 32 ./parallel.o
